@@ -3,7 +3,11 @@
 ## Expected Behavior:
 
 ## Hardware Needed:
-
+* Computer: current Mac (OS X) or PC (Windows 7+)
+* Nexys A7-100T FPGA Board
+* Micro-USB Cable
+* VGA Cable
+* Monitor/TV with VGA input or VGA adapter
 ## How to play:
 ### 1. Create a new RTL project _siren_ in Vivado Quick Start
 
