@@ -1,4 +1,4 @@
-## runner.xdc
+## subway.xdc
 
 ## Clock signal
 set_property -dict { PACKAGE_PIN E3 IOSTANDARD LVCMOS33 } [get_ports {clk_in}];
