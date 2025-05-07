@@ -1,7 +1,10 @@
 # CPE-487 Final Project
 # Subway Surfers
+![image](https://github.com/user-attachments/assets/0652e8ab-f38b-4ba7-8480-8d589c972d5c)  
 ## Expected Behavior:
-
+* Our Project is based off of the game Subway Surfers
+* It starts off in the middle and you are able to move your player left and right to avoid the trains
+* The objective is to pick up the most amount of coins without hitting any obstacles
 ## Hardware Needed:
 * Computer: current Mac (OS X) or PC (Windows 7+)
 * Nexys A7-100T FPGA Board
