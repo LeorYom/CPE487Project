@@ -54,7 +54,7 @@ ARCHITECTURE Behavioral OF vga_top IS
 	SIGNAL led_mpx : STD_LOGIC_VECTOR (2 DOWNTO 0); -- 7-seg multiplexing clock
 	SIGNAL c_counter_score : std_logic_vector (15 downto 0);
 	
-	COMPONENT runner IS
+	COMPONENT subway IS
 		PORT (
 			v_sync : IN STD_LOGIC;
 			pixel_row : IN STD_LOGIC_VECTOR(10 DOWNTO 0);
@@ -148,7 +148,7 @@ ckp : PROCESS (clk_in)
 
 	vga_blue(0) <= '0';
 
-	add_runner : runner
+	add_subway : subway
 
 	PORT MAP( --instantiate frog component
 		v_sync => S_vsync, 
