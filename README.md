@@ -61,19 +61,69 @@
 * In led_driver : leddec port map add f_data2 => c_counter_score, and remove "00000000" from f_data.
 
 ### subway.vhd
+* The entity name was changed from runner to subway.
+* We added 2 coins on each side for the players to collect. The coin is reset back to the top once it reaches the bottom. 
+* The coins flow at different speeds and drops at a different coordinate each time adding randomness to the game.
+* Added 17 LEDS from the board. 15 of the LEDS are green and the other 2 LEDs are blue and red. The 15 LEDS pop up when someone is alive in the game. The red and blue LEDs only popup when your on a hot streak collecting all the coins.
+* We created a flag so that the coin is only being collected once each time it is hit. The flag is connected to the coin counter on the FPGA display, so each time the coin is hit the counter is activated and counts by one.
 * 
 
 
 
 ### leddec.vhd
 * In the port map, change dig from (1 downto 0) to (2 downto 0). Also change f_data from (15 downto 0) to (7 downto 0).Change anode from (3 down to 0) to (7 down to 0). This allows for all digits in the display to be used.
+
+```
+ENTITY leddec IS
+	PORT (
+		dig : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
+		f_data : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+		f_data2 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+		anode : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+		seg : OUT STD_LOGIC_VECTOR (6 DOWNTO 0)
+	);
+END leddec;
+
+ARCHITECTURE Behavioral OF leddec IS
+SIGNAL f_data_temp : std_logic_vector(15 downto 0);
+SIGNAL data : std_logic_vector(3 downto 0);
+```
 * Include f_data2 IN (15 downto 0) in port map. This is for the secondary counter that counts coins.
 * In architecture behavioral of leddec, add a new signal f_data_temp as (15 downto 0).
+  
+``` SIGNAL f_data_temp : std_logic_vector(15 downto 0); ```
 * Under begin, before data <=, add f_data_temp <= "00000000" & f_data;
 * Data is now <= f_data_temp, and dig is "000", to "001", "010", "011" because the entire display is being used now, using 4 bits each: f_data_temp(3 downto 0), f_data_temp(7 downto 4), and so on.
 * f_data2 handles "100", "101", "110", and "111"/Else. Also moving from 4 bits each.
+
+``` data <= f_data_temp(3 DOWNTO 0) WHEN dig = "000" ELSE
+
+			   f_data_temp(7 DOWNTO 4) WHEN dig = "001" ELSE
+
+			   f_data_temp(11 DOWNTO 8) WHEN dig = "010" ELSE
+			   
+         f_data_temp(15 DOWNTo 12) WHEN dig = "011" ELSE
+			   
+         f_data2(3 DOWNTO 0) WHEN dig = "100" ELSE
+
+			   f_data2(7 DOWNTO 4) WHEN dig = "101" ELSE
+
+			   f_data2(11 DOWNTO 8) WHEN dig = "110" ELSE
+
+			   f_data2(15 DOWNTO 12);
+``` 
 * These two data types, f_data_temp and f_data 2 each represent the two different counters being displayed: the score counter and the coin counter repectively.
-* Under the anode section, turn on all 8 anodes and change the dig values from 00, 01... to 000, 001 type of counting.
+* Under the anode section, turn on all 8 anodes and change the dig values from 00, 01... to 000, 001...
+``` anode <= "11111110" WHEN dig = "000" ELSE --0
+	           "11111101" WHEN dig = "001" ELSE --1
+	           "11111011" WHEN dig = "010" ELSE --2
+	           "11110111" WHEN dig = "011" ELSE --3
+	           "11101111" WHEN dig = "100" ELSE --4
+	           "11011111" WHEN dig = "101" ELSE --5
+	           "10111111" WHEN dig = "110" ELSE --6
+	           "01111111" WHEN dig = "111" ELSE --7
+	           "11111111";
+``` 
 
   
   
