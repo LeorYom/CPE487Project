@@ -14,10 +14,10 @@ ENTITY vga_top IS
 		vga_hsync : OUT STD_LOGIC;
 		vga_vsync : OUT STD_LOGIC;
 		-- to allow the snake to move we make l, r, u, d, and reset buttons which will be clicked on the board
-	   	 LED0 : OUT std_logic;
-        	 LED1 : OUT std_logic;
-       	 	 LED2 : OUT std_logic;
-      		 LED3 : OUT std_logic;
+	   	LED0 : OUT std_logic;
+        	LED1 : OUT std_logic;
+       	 	LED2 : OUT std_logic;
+      		LED3 : OUT std_logic;
       		LED4 : OUT std_logic;
         	LED5 : OUT std_logic;
         	LED6 : OUT std_logic;
@@ -64,29 +64,29 @@ ARCHITECTURE Behavioral OF vga_top IS
 			blue : OUT STD_LOGIC;
 						
 			-- the movements
-	    LED0 : OUT std_logic;
-        LED1 : OUT std_logic;
-        LED2 : OUT std_logic;
-        LED3 : OUT std_logic;
-        LED4 : OUT std_logic;
-        LED5 : OUT std_logic;
-        LED6 : OUT std_logic;
-        LED7 : OUT std_logic;
-        LED8 : OUT std_logic;
-        LED9 : OUT std_logic;
-        LED10 : OUT std_logic;
-        LED11 : OUT std_logic;
-        LED12 : OUT std_logic;
-        LED13 : OUT std_logic;
-        LED14 : OUT std_logic;
-        LED15 : OUT std_logic;
-        LED16_B : OUT std_logic;
-		LED17_R : OUT std_logic; 
+			LED0 : OUT std_logic;
+		        LED1 : OUT std_logic;
+		        LED2 : OUT std_logic;
+		        LED3 : OUT std_logic;
+		        LED4 : OUT std_logic;
+		        LED5 : OUT std_logic;
+		        LED6 : OUT std_logic;
+		        LED7 : OUT std_logic;
+		        LED8 : OUT std_logic;
+		        LED9 : OUT std_logic;
+		        LED10 : OUT std_logic;
+		        LED11 : OUT std_logic;
+		        LED12 : OUT std_logic;
+		        LED13 : OUT std_logic;
+		        LED14 : OUT std_logic;
+		        LED15 : OUT std_logic;
+       			LED16_B : OUT std_logic;
+			LED17_R : OUT std_logic; 
 			left: IN STD_LOGIC;
-            right: IN STD_LOGIC;                                   
-            reset: IN STD_LOGIC;
-            seconds_bcd : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);  -- Seconds in BCD
-            c_counter : OUT STD_logic_vector(15 downto 0)
+		        right: IN STD_LOGIC;                                   
+		        reset: IN STD_LOGIC;
+		        seconds_bcd : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);  -- Seconds in BCD
+		        c_counter : OUT STD_logic_vector(15 downto 0)
 		);
 
 	END COMPONENT;
