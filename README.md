@@ -66,6 +66,27 @@
 * The coins flow at different speeds and drops at a different coordinate each time adding randomness to the game.
 * Added 17 LEDS from the board. 15 of the LEDS are green and the other 2 LEDs are blue and red. The 15 LEDS pop up when someone is alive in the game. The red and blue LEDs only popup when your on a hot streak collecting all the coins.
 * We created a flag so that the coin is only being collected once each time it is hit. The flag is connected to the coin counter on the FPGA display, so each time the coin is hit the counter is activated and counts by one.
+```
+IF (((runner_x >= coin1_x - coin_size AND runner_x <= coin1_x + coin_size)
+        AND (runner_y >= coin1_y - coin_size AND runner_y <= coin1_y + coin_size)) OR
+            ((runner_x >= coin2_x - coin_size AND runner_x <= coin2_x + coin_size)
+        AND (runner_y >= coin2_y - coin_size AND runner_y <= coin2_y + coin_size))) then
+         
+        IF flag = '1' then
+         c_counter_temp <= c_counter_temp + 1;
+          ledsec <= seconds;       
+         flag <= '0';    
+         LED16_B <= '1';
+         LED17_R <= '1';                  
+        END IF;
+        ELSE
+        flag <= '1';
+        END IF;
+        if seconds > ledsec + 4 then
+         LED16_B <= '0';
+         LED17_R <= '0';
+        end if;
+```
 * 
 
 
