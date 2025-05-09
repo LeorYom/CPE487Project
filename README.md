@@ -49,8 +49,31 @@
 * Try to catch as many coins as possible without hitting any of the trains!!!
 
 * The player will be able to avoid the obstacles with BTNL and BTNR to move the subway surfer left and right 
-
-
+## Inputs and Outputs
+### Inputs
+* Left, Right, and reset buttons
+* f_data, f_data2, and Dig
+* clk_in1
+### Outputs
+* All 17 LEDs: LED0, LED1, LED2,...,LED15, LED16_B, LED17_R
+* Anode and Seg
+* clk_out1
+* seconds_bcd and c_counter
+## Modules
+### vga_sync.vhd
+*
+### vga_top.vhd
+*
+### subway.vhd
+*
+### subway.xdc
+*
+### leddec.vhd
+*
+### clk_wiz_0_clk_wiz.vhd
+*
+### clk_wiz_0.vhd
+*
 ## Modifications
 ### vga_sync.vhd
 * For all the constants, it needs to be changed to fit your display.
@@ -104,8 +127,37 @@ IF (((runner_x >= coin1_x - coin_size AND runner_x <= coin1_x + coin_size)
 
 ### subway.xdc
 * Added all 8 anode pins for the display.
+```
+set_property -dict {PACKAGE_PIN J17 IOSTANDARD LVCMOS33} [get_ports {anode[0]}]
+set_property -dict {PACKAGE_PIN J18 IOSTANDARD LVCMOS33} [get_ports {anode[1]}]
+set_property -dict {PACKAGE_PIN T9 IOSTANDARD LVCMOS33} [get_ports {anode[2]}]
+set_property -dict {PACKAGE_PIN J14 IOSTANDARD LVCMOS33} [get_ports {anode[3]}]
+set_property -dict { PACKAGE_PIN P14   IOSTANDARD LVCMOS33 } [get_ports { anode[4] }]; #IO_L8N_T1_D12_14 Sch=an[4]
+set_property -dict { PACKAGE_PIN T14   IOSTANDARD LVCMOS33 } [get_ports { anode[5] }]; #IO_L14P_T2_SRCC_14 Sch=an[5]
+set_property -dict { PACKAGE_PIN K2    IOSTANDARD LVCMOS33 } [get_ports { anode[6] }]; #IO_L23P_T3_35 Sch=an[6]
+set_property -dict { PACKAGE_PIN U13   IOSTANDARD LVCMOS33 } [get_ports { anode[7] }]; #IO_L23N_T3_A02_D18_14 Sch=an[7]
+```
 * Added all 17 LEDS to connect to the LEDs on the FPGA.
-
+```
+set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { LED0 }]; #IO_L18P_T2_A24_15 Sch=led[0]
+set_property -dict { PACKAGE_PIN K15   IOSTANDARD LVCMOS33 } [get_ports { LED1 }]; #IO_L24P_T3_RS1_15 Sch=led[1]
+set_property -dict { PACKAGE_PIN J13   IOSTANDARD LVCMOS33 } [get_ports { LED2 }]; #IO_L17N_T2_A25_15 Sch=led[2]
+set_property -dict { PACKAGE_PIN N14   IOSTANDARD LVCMOS33 } [get_ports { LED3 }]; #IO_L8P_T1_D11_14 Sch=led[3]
+set_property -dict { PACKAGE_PIN R18   IOSTANDARD LVCMOS33 } [get_ports { LED4 }]; #IO_L7P_T1_D09_14 Sch=led[4]
+set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports { LED5 }]; #IO_L18N_T2_A11_D27_14 Sch=led[5]
+set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports { LED6 }]; #IO_L17P_T2_A14_D30_14 Sch=led[6]
+set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports { LED7 }]; #IO_L18P_T2_A12_D28_14 Sch=led[7]
+set_property -dict { PACKAGE_PIN V16   IOSTANDARD LVCMOS33 } [get_ports { LED8 }]; #IO_L16N_T2_A15_D31_14 Sch=led[8]
+set_property -dict { PACKAGE_PIN T15   IOSTANDARD LVCMOS33 } [get_ports { LED9 }]; #IO_L14N_T2_SRCC_14 Sch=led[9]
+set_property -dict { PACKAGE_PIN U14   IOSTANDARD LVCMOS33 } [get_ports { LED10 }]; #IO_L22P_T3_A05_D21_14 Sch=led[10]
+set_property -dict { PACKAGE_PIN T16   IOSTANDARD LVCMOS33 } [get_ports { LED11 }]; #IO_L15N_T2_DQS_DOUT_CSO_B_14 Sch=led[11]
+set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33 } [get_ports { LED12 }]; #IO_L16P_T2_CSI_B_14 Sch=led[12]
+set_property -dict { PACKAGE_PIN V14   IOSTANDARD LVCMOS33 } [get_ports { LED13 }]; #IO_L22N_T3_A04_D20_14 Sch=led[13]
+set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { LED14 }]; #IO_L20N_T3_A07_D23_14 Sch=led[14]
+set_property -dict { PACKAGE_PIN V11   IOSTANDARD LVCMOS33 } [get_ports { LED15 }]; #IO_L21N_T3_DQS_A06_D22_14 Sch=led[15]
+set_property -dict { PACKAGE_PIN R12   IOSTANDARD LVCMOS33 } [get_ports { LED16_B }]; #IO_L5P_T0_D06_14 Sch=led16_b
+set_property -dict { PACKAGE_PIN N16   IOSTANDARD LVCMOS33 } [get_ports { LED17_R }]; #IO_L11N_T1_SRCC_14 Sch=led17_r
+```
 ### leddec.vhd
 * In the port map, change dig from (1 downto 0) to (2 downto 0). Also change f_data from (15 downto 0) to (7 downto 0).Change anode from (3 down to 0) to (7 down to 0). This allows for all digits in the display to be used.
 
@@ -160,6 +212,13 @@ SIGNAL data : std_logic_vector(3 downto 0);
 	           "01111111" WHEN dig = "111" ELSE --7
 	           "11111111";
 ``` 
+## Responsibilities 
+### Ryan Tierney
+*
+### Leor Yomtobian
+*
+## Difficulties
+1. 
 
   
   
