@@ -52,6 +52,20 @@
 
 
 ## Modifications
+### vga_sync.vhd
+* For all the constants, it needs to be changed to fit your display.
+```
+    CONSTANT H      : INTEGER := 900; 
+    CONSTANT V      : INTEGER := 600; 
+    CONSTANT H_FP   : INTEGER := 40; 
+    CONSTANT H_BP   : INTEGER := 88; 
+    CONSTANT H_SYNC : INTEGER := 128; 
+    CONSTANT V_FP   : INTEGER := 1; 
+    CONSTANT V_BP   : INTEGER := 23;  
+    CONSTANT V_SYNC : INTEGER := 4;    
+    CONSTANT FREQ   : INTEGER := 60;  
+```
+* Ensured that it connects to the VGA monitor correctly. 
 ### vga_top.vhd
 * Anode in the port map must be changed from (3 downto 0) to (7 downto 0). This is required for the display to utilize all 8 digits.
 * In architecture behavioral include a signal c_counter_score : std_logic_vector (15 downto 0). This is a variable required for the process of counting the coins collected.
@@ -87,9 +101,10 @@ IF (((runner_x >= coin1_x - coin_size AND runner_x <= coin1_x + coin_size)
          LED17_R <= '0';
         end if;
 ```
-* 
 
-
+### subway.xdc
+* Added all 8 anode pins for the display.
+* Added all 17 LEDS to connect to the LEDs on the FPGA.
 
 ### leddec.vhd
 * In the port map, change dig from (1 downto 0) to (2 downto 0). Also change f_data from (15 downto 0) to (7 downto 0).Change anode from (3 down to 0) to (7 down to 0). This allows for all digits in the display to be used.
