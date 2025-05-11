@@ -5,7 +5,7 @@
 * Our Project is based off of the game Subway Surfers
 * It starts off in the middle and you are able to move your player left and right to avoid the trains
 * The objective is to pick up the most amount of coins without hitting any obstacles
-  ![Demo](https://github.com/LeorYom/CPE487Project/blob/main/IMG_2297-ezgif.com-video-to-gif-converter.gif)
+  ![Demo](https://github.com/LeorYom/CPE487Project/blob/main/IMG_2297-ezgif.com-video-to-gif-converter%20(1).gif)
 ## Hardware Needed:
 * Computer: current Mac (OS X) or PC (Windows 7+)
 * Nexys A7-100T FPGA Board
@@ -324,7 +324,12 @@ SIGNAL data : std_logic_vector(3 downto 0);
 * Created the coin counter and the 2 coins on the game. We could have added a 3rd coin, but the game would have become too easy. 
 ## Difficulties
 1.  The red and blue led's would only flash for a nanosecond which made it very difficult to see if you hit a coin or not since the coin was using flag so it would count by one. We saw that the counter would work perfectly if it was seconds + 4, which would keep the light on for a second. We tried using one second or two seconds for the light, but we dealt with many issues. The issues were either double counting the coin, the light staying on forever, only working on every other coin. We realized it would only work at 4 seconds or higher which is how we came up with the coin streak.
-2.  
+2.  The coin counter would register a coin count multiple times per a single contact with the coin. This issue was resolved by immplementing a using the flag and flag reset signals that can be found in subway.vhd: 
+```
+    Signal flag : std_logic := '1';
+    signal flagreset : std_logic := '0';
+```
+
 3.  The score counter from the original code would reset after just 64 seconds. This bug was fixed in the subway.vhd file by changing the line (IF seconds...) from what it was previously, to:
    ```
               IF seconds = 400 THEN
