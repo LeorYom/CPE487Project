@@ -62,19 +62,120 @@
 * seconds_bcd and c_counter
 ## Modules
 ### vga_sync.vhd
-*
+* The `vga_sync.vhd` module is responsible for generating VGA timing signals and determining pixel positions on the screen.
+* It operates horizontal (`h_cnt`) and vertical (`v_cnt`) counters to track the location of each pixel.
+
+* This module produces the `hsync` and `vsync` signals required by the VGA display for synchronization.
+
+* It outputs the current pixel’s row and column (`pixel_row` and `pixel_col`) to indicate its position on the screen.
+
+* It also controls whether RGB signals are active using the `video_on` signal, which disables video output during synchronization periods.
+
+* Inputs:
+
+	- Pixel clock (`pixel_clk`) provided by `clk_wiz_0`
+
+	- Red, green, and blue color data
+
+* Outputs:
+
+	- VGA synchronization signals `(hsync`, `vsync`)
+
+	- Coordinates of the active pixel (`pixel_row`, `pixel_col`)
 ### vga_top.vhd
-*
+* The `vga_top.vhd` file serves as the main module that integrates and manages all the submodules and coordinates the system’s overall behavior.
+* It creates instances of the `vga_sync`, `subway`, `leddec`, and `clk_wiz_0` modules.
+
+* It processes input from the control buttons (`left`, `right`, and `reset`) to manage the runner's movement.
+
+* VGA signal data, such as pixel positions and RGB values, is sent to the `vga_sync` module for display handling.
+
+* The `subway` module’s `seconds_bcd` output is forwarded to the leddec module to drive the 8-segment display.
+
+* Module roles and connections:
+
+* Clock: The `clk_wiz_0` module generates the appropriate VGA clock signal.
+
+* Subway: Handles the game's logic, including the runner's position and collision detection with coins and trains.
+
+* Display: The `leddec` module manages time-multiplexing for the 8-segment LED display.
 ### subway.vhd
-*
+* `subway.vhd` – Game Logic and Object Control
+* This module manages the movement and position of the runner character, as well as the trains, coins, and the logic for the coin counter. This module also also handles collision detection for both coins and trains and manages the stopwatch counter which is also the score.
+
+* Responds to input signals (left, right, reset) to update the runner’s horizontal position.
+
+* Continuously moves the trains and coins (`train1`, `train2`, `train3`, `coin1`, `coin2`) downward and resets their positions once they pass the bottom.
+
+* Detects collisions between the runner and the trains to determine game events.
+
+* Detects collisions between the runner and the coins to determine the main objective of the game.
+
+* Registers a collision of a coin with the runner to add to the counter of coins collected.
+
+* Contains stopwatch functionality that tracks how long the player has survived while the game is running.
+
+* Implements a function to create irregular movement for the coins.
+
+* Key Signals:
+	- `runner_x`, `runner_y`: Current coordinates of the runner.
+
+	- `train1_x`, `train1_y`, etc.: Current positions of each train.
+
+	- `coin1_x`, `coin1_y`, etc.: Current positions of each coin.
+
+	- `seconds`: Internal counter for elapsed time, converted to BCD for display.
+
+	- `r_counter` and `r_var` for iregular coin movement
+
+* Outputs:
+	- VGA RGB values (`red`, `green`, `blue`) for visual output.
+
+	- Elapsed time in BCD format (`seconds_bcd`) for display on the 8-segment display.
+
+	- Coin Counter (`c_counter`) to register, count, and display coin collection.
+
 ### subway.xdc
-*
+* The `subway.xdc` file defines the physical constraints for the FPGA design, including pin assignments for inputs, outputs, and the clock.
+
+	- Assigns the FPGA board’s buttons (BTNL, BTNR, BTNC, BTND, BTNU) to their corresponding hardware ports.
+
+	- Sets up the input clock source (e.g., 100 MHz) for the `clk_wiz_0` module.
+
+	- Connects VGA output signals (`hsync`, `vsync`, `red`, `green`, `blue`) to the correct physical pins on the FPGA to enable video display.
 ### leddec.vhd
-*
+* This module uses the `dig` input as a multiplexing clock to determine which of the four 8-segment displays is currently active.
+
+* It decodes the `seconds_bcd` input to generate the correct signals for the segment lines (`CA` to `CG`), enabling the display of the appropriate digits.
+
+* By rapidly cycling through all four digits, it creates the illusion that all displays are lit simultaneously.
+
+* Inputs:
+
+	- `dig`: 3-bit signal that selects which digit is active at any moment.
+
+	- `f_data`: 8-bit input carrying the BCD values to be shown.
+
+	- `f_data2`: 16-bit input carrying the coin counter value to be shown
+
+* Outputs:
+
+	- `anode`: Enables both of the four digit displays (`AN0`–`AN7`).
+
+	- `seg`: Controls the segment lines to form the digits on the active display.
 ### clk_wiz_0_clk_wiz.vhd
-*
+* The `clk_wiz_0_clk_wiz.vhd` file is a supporting module for `clk_wiz_0`, containing the core logic for clock signal generation.
+
+* It defines the internal configuration of clock dividers and multipliers needed to produce the desired output frequencies.
 ### clk_wiz_0.vhd
-*
+* The `clk_wiz_0.vhd` module provides the necessary clock signals for the system, typically without modification.
+
+* It takes the main input clock from the FPGA (e.g., 100 MHz) and generates a 25 MHz clock required by the `vga_sync` module.
+
+* Additional clock outputs can be configured if other components need different frequencies.
+
+* This module is created using the Xilinx Clocking Wizard, which allows custom clock frequency generation based on system requirements.
+
 ## Modifications
 ### vga_sync.vhd
 * For all the constants, it needs to be changed to fit your display.
