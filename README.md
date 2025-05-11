@@ -107,6 +107,10 @@
 
 * Continuously moves the trains and coins (`train1`, `train2`, `train3`, `coin1`, `coin2`) downward and resets their positions once they pass the bottom.
 
+*  All of the bottom LEDs, (`LED0`, `LED1`, `LED2`,... `LED15`) turn on when you start the game and turn off when you lose.
+
+*  The other two coins, (`LED16_B`, `LED17_R`) turn on when you hit a coin and turn off if you are not on a coin streak. 
+   
 * Detects collisions between the runner and the trains to determine game events.
 
 * Detects collisions between the runner and the coins to determine the main objective of the game.
