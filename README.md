@@ -219,7 +219,8 @@ SIGNAL data : std_logic_vector(3 downto 0);
 ### Leor Yomtobian
 *
 ## Difficulties
-1. The score counter from the original code would reset after just 64 seconds. This bug was fixed in the subway.vhd file by changing the line (IF seconds...) from what it was previously, to:
+1.
+2.  The score counter from the original code would reset after just 64 seconds. This bug was fixed in the subway.vhd file by changing the line (IF seconds...) from what it was previously, to:
    ```
               IF seconds = 400 THEN
                     seconds <= 0;
@@ -227,6 +228,6 @@ SIGNAL data : std_logic_vector(3 downto 0);
    ```
 The following demonstration shows the score counter exceeding 64 seconds:
 ![Demo](https://github.com/LeorYom/CPE487Project/blob/main/IMG_2299-ezgif.com-video-to-gif-converter%20(2).gif)
-3. 
+ 
   
   
