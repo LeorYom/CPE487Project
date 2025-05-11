@@ -219,6 +219,6 @@ SIGNAL data : std_logic_vector(3 downto 0);
 *
 ## Difficulties
 1. 
-![Demo](/Demo.gif)
+![Demo](https://github.com/LeorYom/CPE487Project/blob/main/IMG_2299-ezgif.com-video-to-gif-converter%20(2).gif)
   
   
