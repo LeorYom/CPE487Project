@@ -219,8 +219,9 @@ SIGNAL data : std_logic_vector(3 downto 0);
 ### Leor Yomtobian
 *
 ## Difficulties
-1.
-2.  The score counter from the original code would reset after just 64 seconds. This bug was fixed in the subway.vhd file by changing the line (IF seconds...) from what it was previously, to:
+1.  The red and blue led's would only flash for a nanosecond which made it very difficult to see if you hit a coin or not since the coin was using flag so it would count by one. We saw that the counter would work perfectly if it was seconds + 4, which would keep the light on for a second. We tried using one second or two seconds for the light, but we dealt with many issues. The issues were either double counting the coin, the light staying on forever, only working on every other coin. We realized it would only work at 4 seconds or higher which is how we came up with the coin streak.
+2.  
+3.  The score counter from the original code would reset after just 64 seconds. This bug was fixed in the subway.vhd file by changing the line (IF seconds...) from what it was previously, to:
    ```
               IF seconds = 400 THEN
                     seconds <= 0;
