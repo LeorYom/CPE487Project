@@ -214,10 +214,13 @@ SIGNAL data : std_logic_vector(3 downto 0);
 	           "11111111";
 ``` 
 ## Responsibilities 
+### This is a list of what we worked on in the projects
 ### Ryan Tierney
-*
+* Found a way to use all the display boards. 4 displays for the seconds counter and the other 4 displays for the coin counter.
+* Allowed the coins to change position each time it regenerated in the game allowing randomness. 
 ### Leor Yomtobian
-*
+* Configuring all the LEDs on the board and incorporating it in the game
+* Created the coin counter and the 2 coins on the game. We could have added a 3rd coin, but the game would have become too easy. 
 ## Difficulties
 1.  The red and blue led's would only flash for a nanosecond which made it very difficult to see if you hit a coin or not since the coin was using flag so it would count by one. We saw that the counter would work perfectly if it was seconds + 4, which would keep the light on for a second. We tried using one second or two seconds for the light, but we dealt with many issues. The issues were either double counting the coin, the light staying on forever, only working on every other coin. We realized it would only work at 4 seconds or higher which is how we came up with the coin streak.
 2.  
