@@ -330,6 +330,12 @@ SIGNAL data : std_logic_vector(3 downto 0);
 * Created the flag system for the coin counter coin counter allowing them to be counted correctly
 * Modified the speed, shape, and position of the train entities to better fit the object of the game
 * Modified vga_sync, vga_top, and subway.xdc to allow for the implementation of the new game mechanics
+## Timeline
+* 4/24/2025 - Final idea for project was decided and initial work began, which started with getting the source code to be displayed properly onto the monitor that was being used.
+* 4/28/2025 - Coin entities were created, including the drawing and movement of the coins. The shaping of the coins was to be circular, and this equation was implemented into the code.
+* 5/2/2025 - Coin counter system was started, basic logic to detect coin collision with runner and to create an incrementer for a coin counter. LED's were implemented to be on at all times.
+* 5/6/2025 - Bugs with coin counter were fixed, coin counter logic was finalized. LED system to turn on for coin streaks was implemented and finalized.
+* 5/8/2025 - Randomness to coin movement was implemented, debugging of the score counter was complete.
 ## Difficulties
 1.  The red and blue led's would only flash for a nanosecond which made it very difficult to see if you hit a coin or not since the coin was using flag so it would count by one. We saw that the counter would work perfectly if it was seconds + 4, which would keep the light on for a second. We tried using one second or two seconds for the light, but we dealt with many issues. The issues were either double counting the coin, the light staying on forever, only working on every other coin. We realized it would only work at 4 seconds or higher which is how we came up with the coin streak.
 2.  The coin counter would register a coin count multiple times per a single contact with the coin. This issue was resolved by immplementing a using the flag and flag reset signals that can be found in subway.vhd: 
