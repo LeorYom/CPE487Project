@@ -219,6 +219,6 @@ SIGNAL data : std_logic_vector(3 downto 0);
 *
 ## Difficulties
 1. 
-
+![Demo](/Demo.gif)
   
   
