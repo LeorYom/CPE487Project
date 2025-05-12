@@ -61,6 +61,25 @@
 * clk_out1
 * seconds_bcd and c_counter
 ## Modules
+<img width="516" alt="image" src="https://github.com/user-attachments/assets/f6ff612c-2f1d-4fd2-b306-6bc967c9b08c" />
+
+### vga_top.vhd
+* The `vga_top.vhd` file serves as the main module that integrates and manages all the submodules and coordinates the system’s overall behavior.
+* It creates instances of the `vga_sync`, `subway`, `leddec`, and `clk_wiz_0` modules.
+
+* It processes input from the control buttons (`left`, `right`, and `reset`) to manage the runner's movement.
+
+* VGA signal data, such as pixel positions and RGB values, is sent to the `vga_sync` module for display handling.
+
+* The `subway` module’s `seconds_bcd` output is forwarded to the leddec module to drive the 8-segment display.
+
+* Module roles and connections:
+
+* Clock: The `clk_wiz_0` module generates the appropriate VGA clock signal.
+
+* Subway: Handles the game's logic, including the runner's position and collision detection with coins and trains.
+
+* Display: The `leddec` module manages time-multiplexing for the 8-segment LED display.
 ### vga_sync.vhd
 * The `vga_sync.vhd` module is responsible for generating VGA timing signals and determining pixel positions on the screen.
 * It operates horizontal (`h_cnt`) and vertical (`v_cnt`) counters to track the location of each pixel.
@@ -82,23 +101,6 @@
 	- VGA synchronization signals `(hsync`, `vsync`)
 
 	- Coordinates of the active pixel (`pixel_row`, `pixel_col`)
-### vga_top.vhd
-* The `vga_top.vhd` file serves as the main module that integrates and manages all the submodules and coordinates the system’s overall behavior.
-* It creates instances of the `vga_sync`, `subway`, `leddec`, and `clk_wiz_0` modules.
-
-* It processes input from the control buttons (`left`, `right`, and `reset`) to manage the runner's movement.
-
-* VGA signal data, such as pixel positions and RGB values, is sent to the `vga_sync` module for display handling.
-
-* The `subway` module’s `seconds_bcd` output is forwarded to the leddec module to drive the 8-segment display.
-
-* Module roles and connections:
-
-* Clock: The `clk_wiz_0` module generates the appropriate VGA clock signal.
-
-* Subway: Handles the game's logic, including the runner's position and collision detection with coins and trains.
-
-* Display: The `leddec` module manages time-multiplexing for the 8-segment LED display.
 ### subway.vhd
 * `subway.vhd` – Game Logic and Object Control
 * This module manages the movement and position of the runner character, as well as the trains, coins, and the logic for the coin counter. This module also also handles collision detection for both coins and trains and manages the stopwatch counter which is also the score.
@@ -167,10 +169,6 @@
 	- `anode`: Enables both of the four digit displays (`AN0`–`AN7`).
 
 	- `seg`: Controls the segment lines to form the digits on the active display.
-### clk_wiz_0_clk_wiz.vhd
-* The `clk_wiz_0_clk_wiz.vhd` file is a supporting module for `clk_wiz_0`, containing the core logic for clock signal generation.
-
-* It defines the internal configuration of clock dividers and multipliers needed to produce the desired output frequencies.
 ### clk_wiz_0.vhd
 * The `clk_wiz_0.vhd` module provides the necessary clock signals for the system, typically without modification.
 
@@ -179,6 +177,11 @@
 * Additional clock outputs can be configured if other components need different frequencies.
 
 * This module is created using the Xilinx Clocking Wizard, which allows custom clock frequency generation based on system requirements.
+
+### clk_wiz_0_clk_wiz.vhd
+* The `clk_wiz_0_clk_wiz.vhd` file is a supporting module for `clk_wiz_0`, containing the core logic for clock signal generation.
+
+* It defines the internal configuration of clock dividers and multipliers needed to produce the desired output frequencies.
 
 ## Modifications
 ### vga_sync.vhd
