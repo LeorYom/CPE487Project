@@ -63,6 +63,8 @@
 ## Modules
 <img width="516" alt="image" src="https://github.com/user-attachments/assets/f6ff612c-2f1d-4fd2-b306-6bc967c9b08c" />
 
+The above diagram shows how all the source files are connected to each other.
+
 ### vga_top.vhd
 * The `vga_top.vhd` file serves as the main module that integrates and manages all the submodules and coordinates the system’s overall behavior.
 * It creates instances of the `vga_sync`, `subway`, `leddec`, and `clk_wiz_0` modules.
