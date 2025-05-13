@@ -143,6 +143,10 @@ The above diagram shows how all the source files are connected to each other.
 
 	- Coin Counter (`c_counter`) to register, count, and display coin collection.
 
+![subway](https://github.com/user-attachments/assets/36e64717-fc56-4fb5-ad21-28139734728c)
+
+
+
 ### subway.xdc
 * The `subway.xdc` file defines the physical constraints for the FPGA design, including pin assignments for inputs, outputs, and the clock.
 
