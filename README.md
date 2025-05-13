@@ -2,9 +2,9 @@
 # Subway Surfers
 ![image](https://github.com/user-attachments/assets/0652e8ab-f38b-4ba7-8480-8d589c972d5c)  
 ## Expected Behavior:
-* Our Project is based off of the game Subway Surfers
-* It starts off in the middle and you are able to move your player left and right to avoid the trains
-* The objective is to pick up the most amount of coins without hitting any obstacles
+* Our Project is based off of the game Subway Surfers.
+* It starts off in the middle and you are able to move your player left and right to avoid the trains.
+* The objective is to pick up the most amount of coins without hitting any obstacles.
   ![Demo](https://github.com/LeorYom/CPE487Project/blob/main/IMG_2297-ezgif.com-video-to-gif-converter%20(1).gif)
 ## Hardware Needed:
 * Computer: current Mac (OS X) or PC (Windows 7+)
@@ -49,7 +49,7 @@
 
 * Try to catch as many coins as possible without hitting any of the trains!!!
 
-* The player will be able to avoid the obstacles with BTNL and BTNR to move the subway surfer left and right 
+* The player will be able to avoid the obstacles with BTNL and BTNR to move the subway surfer left and right
 ## Inputs and Outputs
 ### Inputs
 * Left, Right, and reset buttons
@@ -146,7 +146,7 @@ The above diagram shows how all the source files are connected to each other.
 ![subway](https://github.com/user-attachments/assets/36e64717-fc56-4fb5-ad21-28139734728c)
 
 
-
+Above is a diagram of how everything connects together. 
 ### subway.xdc
 * The `subway.xdc` file defines the physical constraints for the FPGA design, including pin assignments for inputs, outputs, and the clock.
 
@@ -335,10 +335,10 @@ SIGNAL data : std_logic_vector(3 downto 0);
 * Started the coin counter, and getting the counter to be applied onto the left 4 displays.
 * Allowed the coins to change position each time it regenerated in the game allowing randomness. 
 ### Leor Yomtobian
-* Configuring all the LEDs on the board and incorporating it in the game, including the streak LED that activates after collecting enough coins
-* Created the flag system for the coin counter coin counter allowing them to be counted correctly
-* Modified the speed, shape, and position of the train entities to better fit the object of the game
-* Modified vga_sync, vga_top, and subway.xdc to allow for the implementation of the new game mechanics
+* Configuring all the LEDs on the board and incorporating it in the game, including the streak LED that activates after collecting enough coins.
+* Created the flag system for the coin counter coin counter allowing them to be counted correctly.
+* Modified the speed, shape, and position of the train entities to better fit the object of the game.
+* Modified vga_sync, vga_top, and subway.xdc to allow for the implementation of the new game mechanics.
 ## Timeline
 * 4/24/2025 - Final idea for project was decided and initial work began, which started with getting the source code to be displayed properly onto the monitor that was being used.
 * 4/28/2025 - Coin entities were created, including the drawing and movement of the coins. The shaping of the coins was to be circular, and this equation was implemented into the code.
