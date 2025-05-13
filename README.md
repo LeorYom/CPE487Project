@@ -6,6 +6,7 @@
 * It starts off in the middle and you are able to move your player left and right to avoid the trains.
 * The objective is to pick up the most amount of coins without hitting any obstacles.
   ![Demo](https://github.com/LeorYom/CPE487Project/blob/main/IMG_2297-ezgif.com-video-to-gif-converter%20(1).gif)
+  [Watch on Google Drive](https://drive.google.com/file/d/1FnVENnEBOnnwDio2ggR158DuZZgsUsgm/view?t=1)
 ## Hardware Needed:
 * Computer: current Mac (OS X) or PC (Windows 7+)
 * Nexys A7-100T FPGA Board
