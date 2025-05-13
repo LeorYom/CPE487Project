@@ -82,6 +82,10 @@ The above diagram shows how all the source files are connected to each other.
 * Subway: Handles the game's logic, including the runner's position and collision detection with coins and trains.
 
 * Display: The `leddec` module manages time-multiplexing for the 8-segment LED display.
+
+<img width="425" alt="image" src="https://github.com/user-attachments/assets/bd296677-82b9-475d-abd7-70a1ff615f3e" />
+
+Above is a diagram of how everything connects together. 
 ### vga_sync.vhd
 * The `vga_sync.vhd` module is responsible for generating VGA timing signals and determining pixel positions on the screen.
 * It operates horizontal (`h_cnt`) and vertical (`v_cnt`) counters to track the location of each pixel.
